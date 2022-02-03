@@ -38,8 +38,8 @@ sysinfo.txt
 # Random
 *.aab
 /Logs/
-/Assets/BNG\ Framwork/
-/Assets/BNG\ Framwork.meta
+/Assets/BNG\ Framework/
+/Assets/BNG\ Framework.meta
 /Assets/Photon/
 /Assets/Photon.meta
 /Assets/MilkyWay/
