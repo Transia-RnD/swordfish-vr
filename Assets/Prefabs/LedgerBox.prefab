@@ -186,12 +186,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225009c16a7b4ea18bc60bfd9ff87df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebugMenu: {fileID: 0}
+  debugMenu: {fileID: 0}
   PaymentMaterial: {fileID: 2100000, guid: cba66c276aed0874091de1c33eb3950d, type: 2}
   TrustMaterial: {fileID: 2100000, guid: c181c23a6120fbe4aadd5bb53a58dd78, type: 2}
   OfferMaterial: {fileID: 2100000, guid: 663834164c6a04740aaa1b778249ce7e, type: 2}
   EscrowMaterial: {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
   AccountMaterial: {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
+  NFTMaterial: {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
   MiscMaterial: {fileID: 2100000, guid: f794c8451763f354c84ed1f9b0ea15a5, type: 2}
   txId: 
   endPos: {x: 0, y: 0, z: 0}

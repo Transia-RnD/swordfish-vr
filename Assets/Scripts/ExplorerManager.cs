@@ -32,8 +32,8 @@ public class ExplorerManager : MonoBehaviour
     private List<GameObject> ledgerGOList = new List<GameObject>();
 
     private static IRippleClient client;
-    private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
-    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+    // private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
+    private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
 
     private List<string> transactions = new List<string>();
 
@@ -55,7 +55,7 @@ public class ExplorerManager : MonoBehaviour
     {
         client = new RippleClient(serverUrl);
         client.Connect();
-        // InvokeRepeating("AddLedger", 2.0f, 4.0f);
+        InvokeRepeating("AddLedger", 2.0f, 4.0f);
     }
 
     // Update is called once per frame

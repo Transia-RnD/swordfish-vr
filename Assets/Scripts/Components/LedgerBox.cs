@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using RippleDotNet.Model.Ledger;
+using RippleDotNet;
+using Ripple.Core.Types;
+using RippleDotNet.Model;
+using RippleDotNet.Model.Transaction.TransactionTypes;
+using RippleDotNet.Requests.Transaction;
+using RippleDotNet.Responses.Transaction.Interfaces;
+using RippleDotNet.Responses.Transaction.TransactionTypes;
+using RippleDotNet.Extensions;
+using System.Threading.Tasks;
+using Ipfs.Http;
+using IO.Swagger.Model;
 
 public class LedgerBox : MonoBehaviour
 {
@@ -13,9 +24,11 @@ public class LedgerBox : MonoBehaviour
     public Material OfferMaterial;
     public Material EscrowMaterial;
     public Material AccountMaterial;
+    public Material NFTMaterial;
     public Material MiscMaterial;
 
     Material initialMaterial;
+
     MeshRenderer render;
 
     // Currently activating the object?
@@ -30,47 +43,38 @@ public class LedgerBox : MonoBehaviour
     public HashOrTransaction transaction;
     // Start is called before the first frame update
 
-    private static IRippleClient client;
-    private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
-    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
-
     void Start()
     {
         render = GetComponent<MeshRenderer>();
         initialMaterial = render.sharedMaterial;
         render.sharedMaterial = PaymentMaterial;
         UpdateMaterial();
-
-        client = new RippleClient(serverUrl);
-        client.Connect();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            // PRIMARY TRIGGER
-            Debug.Log("Z");
-            active = true;
-            // UpdateSwarm();
-        }
         float step = speed * Time.deltaTime;
-        // transform.localPosition = Vector3.MoveTowards(transform.localPosition, endPos, step);
-
-    }
-
-    public GetTransaction()
-    {
-
-        // TransactionResponseCommon rtransaction = await rippleClient.Transaction(transaction.Transaction.TransactionHash);
-        TransactionResponseCommon rtransaction = await rippleClient.Transaction("");
-        // LogText(string.Format("Closed Ledger: {0}", closedLedger.LedgerHash));
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, endPos, step);
     }
 
     public void UpdateMaterial() {
+        if (transaction == null) { return; }
+        Debug.Log(transaction.Transaction.TransactionType.ToString());
         switch (transaction.Transaction.TransactionType.ToString())
         {
+            case "NFTokenMint":
+                render.sharedMaterial = NFTMaterial;
+                // Debug.Log(transaction.Transaction);
+                break;
+            case "NFTokenBurn":
+                render.sharedMaterial = NFTMaterial;
+                // Debug.Log(transaction.Transaction);
+                break;
+            // case "NFTokenOfferCreate":
+            //     render.sharedMaterial = NFTMaterial;
+            //     // Debug.Log(transaction.Transaction);
+            //     break;
             case "AccountSet":
                 render.sharedMaterial = AccountMaterial;
                 break;
@@ -146,7 +150,6 @@ public class LedgerBox : MonoBehaviour
     // No longer hovering over our object
     public void ResetHovering(PointerEventData eventData) {
         hovering = false;
-        // active = false;
 
         UpdateSwarm();
     }
