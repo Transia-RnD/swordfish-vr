@@ -24,13 +24,13 @@ https://sidequestvr.com/setup-howto
 
 ### Clone the git repo
 
-`git clone https://Harpangell@bitbucket.org/angellenterprises/swordfish.git`
+`git clone https://github.com/Harp-Angell-Labs/swordfish-vr.git`
 
 ### Install the app
 
 In sidequest click the "upload sdk" button in the top right corner.
 
-Chose the `Gambit VR.apk` from the downloaded repo. (If the apk was not included visit the tag or release file for the source code)
+Chose the `Swordfish.apk` from the downloaded repo. (If the apk was not included visit the tag or release file for the source code)
 
 Once complete, open the oculus application, click the game menu, then in the upper right, select the drop down and choose unknown developer.
 
