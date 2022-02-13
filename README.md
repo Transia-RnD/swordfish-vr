@@ -38,3 +38,9 @@ Once complete, open the oculus application, click the game menu, then in the upp
 If Common Error
 
 `using CommonC = Unity.Burst.Intrinsics.Common;`
+
+Find: `Common.umul128`
+
+Replace: `CommonC.umul128`
+
+ALL MUST BE DONE IN ONE SAVE NOT 2

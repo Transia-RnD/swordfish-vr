@@ -12,6 +12,7 @@ public class DefaultRoom
     public int maxPlayer;
 }
 
+
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public List<DefaultRoom> defaultRooms;

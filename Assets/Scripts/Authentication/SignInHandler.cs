@@ -69,7 +69,7 @@ public class SignInHandler : MonoBehaviour
     EnableUI();
     if (LogTaskCompletion(task, "Sign-in"))
     {
-      SceneManager.LoadScene("Meta(x)rplorer");
+      SceneManager.LoadScene("MetaXrplorer");
     }
   }
 

@@ -12,27 +12,33 @@ public class AuthSetup : MonoBehaviour
   public Text DebugText;
   
   void Start()
-  {
-    Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
-        var dependencyStatus = task.Result;
-        if (dependencyStatus == Firebase.DependencyStatus.Available) {
-            authManager.InitializeFirebase();
-        } else {
+    {
+        Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+            var dependencyStatus = task.Result;
             LogText(System.String.Format(
-                "Could not resolve all Firebase dependencies: {0}",
+                "STATUS: {0}",
                 dependencyStatus
             ));
-        }
-    });
-  }
+            if (dependencyStatus == Firebase.DependencyStatus.Available) {
+                LogText("INITIALIZING");
+                authManager.DebugText = DebugText;
+                authManager.InitializeFirebase();
+            } else {
+                LogText(System.String.Format(
+                    "Could not resolve all Firebase dependencies: {0}",
+                    dependencyStatus
+                ));
+            }
+        });
+    }
 
-  void LogText(string message) {
+    void LogText(string message) 
+    {
 
         // Output to worldspace to help with debugging.
         if (DebugText) {
             DebugText.text += "\n" + message;
         }
-
         Debug.Log(message);
     }
 }

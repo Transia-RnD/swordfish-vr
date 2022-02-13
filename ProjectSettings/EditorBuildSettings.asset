@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/XRMultiMain.unity
     guid: c071088de1a1a4bbd92d73bff25cdd30
   - enabled: 1
-    path: Assets/Scenes/Meta(x)rplorer.unity
+    path: Assets/Scenes/MetaXrplorer.unity
     guid: 85f53006f2d2e4b81bb84d8a3829da90
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6fe3ca064fb02430d8349daf0787be98,

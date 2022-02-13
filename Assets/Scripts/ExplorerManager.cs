@@ -5,11 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using Ripple.Core.Types;
 using RippleDotNet.Model;
+using RippleDotNet.Json.Converters;
 using RippleDotNet.Model.Ledger;
 using RippleDotNet.Requests.Ledger;
+using RippleDotNet.Model.Account;
+using RippleDotNet.Requests.Account;
 using RippleDotNet;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Utilities;
+using Newtonsoft.Json.Converters;
+using IO.Swagger.Model;
 
 public class LedgerEntity : MonoBehaviour
 {
@@ -24,7 +30,10 @@ public class ExplorerManager : MonoBehaviour
 {
     
     [SerializeField] public GameObject ledgerPrefab;
-    [SerializeField] public GameObject debugMenu;
+    [SerializeField] public GameObject commonTxMenu;
+    [SerializeField] public GameObject accountTxMenu;
+    [SerializeField] public GameObject paymentTxMenu;
+    [SerializeField] public GameObject nftTxMenu;
 
     public float speed = 7.0f;
 
@@ -32,8 +41,8 @@ public class ExplorerManager : MonoBehaviour
     private List<GameObject> ledgerGOList = new List<GameObject>();
 
     private static IRippleClient client;
-    // private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
-    private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+    private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
+    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
 
     private List<string> transactions = new List<string>();
 
@@ -53,37 +62,58 @@ public class ExplorerManager : MonoBehaviour
     // Start is called before the first frame update
     private async void Awake()
     {
-        client = new RippleClient(serverUrl);
-        client.Connect();
-        InvokeRepeating("AddLedger", 2.0f, 4.0f);
+        try
+        {
+            // if (!GameState.Instance.isLoggedIn) { return; }
+            client = new RippleClient(serverUrl);
+            client.Connect();
+            LogText("XRPL CONNECTED");
+            // InvokeRepeating("AddLedger", 2.0f, 4.0f);
+            // Player selfPlayer = GameState.Instance.selfPlayer;
+            LogText(String.Format("PLAYER ADDRESS {0}", "r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH"));
+            AccountInfo accountInfo = await client.AccountInfo("r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH");
+            decimal currencyTotal = (decimal)accountInfo.AccountData.Balance.ValueAsXrp;
+            LogText(String.Format("ACCOUNT CURRENCY {0}", currencyTotal));
+            // await AddLedger();
+        }
+        catch (Exception e)
+        {
+            LogText(String.Format("{0} Awake caught", e));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B))
-        {   
-            // AddLedger();
 
-        }
     }
 
     public async Task AddLedger()
-    {
-        var request = new LedgerRequest {
-            LedgerIndex = new LedgerIndex(LedgerIndexType.Validated),
-            Transactions = true,
-            Expand = true
-        };
-        BaseLedgerInfo closedLedger = await client.ClosedLedger();
-        LogText(string.Format("Closed Ledger: {0}", closedLedger.LedgerHash));
-        request.LedgerHash = closedLedger.LedgerHash;
-        Ledger ledger = await client.Ledger(request);
-        LogText(string.Format("TXs: {0}", ledger.LedgerEntity.Transactions.Count));
-        if (!ledgerList.Contains(ledger))
+    {   
+        try
         {
-            ledgerList.Add(ledger);
-            SpawnLedgerBoxes(ledger);
+            LogText("FETCHING LEDGER");
+            var request = new LedgerRequest {
+                LedgerIndex = new LedgerIndex(LedgerIndexType.Validated),
+                Transactions = true,
+                Expand = true
+            };
+            LogText("LEDGER REQUEST");
+            BaseLedgerInfo closedLedger = await client.ClosedLedger();
+            LogText("RECEIVED LEDGER");
+            // LogText(string.Format("Closed Ledger: {0}", closedLedger.LedgerHash));
+            request.LedgerHash = closedLedger.LedgerHash;
+            Ledger ledger = await client.Ledger(request);
+            // LogText(string.Format("TXs: {0}", ledger.LedgerEntity.Transactions.Count));
+            if (!ledgerList.Contains(ledger))
+            {
+                ledgerList.Add(ledger);
+                SpawnLedgerBoxes(ledger);
+            }
+        }
+        catch (Exception e)
+        {
+            LogText(String.Format("{0} AddLedger caught", e));
         }
     }
 
@@ -128,16 +158,71 @@ public class ExplorerManager : MonoBehaviour
         return new Vector3(x_cur, y_cur, z_cur);
     }
 
+    GameObject GetTxMenu(string transactionType)
+    {
+        return commonTxMenu;
+        // switch (transactionType)
+        // {
+        //     case "NFTokenMint":
+        //         return nftTxMenu;
+        //     case "NFTokenBurn":
+        //         return nftTxMenu;
+        //     case "NFTokenOfferCreate":
+        //         return nftTxMenu;
+        //     case "AccountSet":
+        //         return accountTxMenu;
+        //     case "EscrowCancel":
+        //         return paymentTxMenu;
+        //     case "EscrowCreate":
+        //         return paymentTxMenu;
+        //     case "EscrowFinish":
+        //         return paymentTxMenu;
+        //     case "OfferCancel":
+        //         return paymentTxMenu;
+        //     case "OfferCreate":
+        //         return paymentTxMenu;
+        //     case "Payment":
+        //         return paymentTxMenu;
+        //     case "PaymentChannelClaim":
+        //         return paymentTxMenu;
+        //     case "PaymentChannelCreate":
+        //         return paymentTxMenu;
+        //     case "PaymentChannelFund":
+        //         return paymentTxMenu;
+        //     case "SetRegularKey":
+        //         return accountTxMenu;
+        //     case "SignerListSet":
+        //         return accountTxMenu;
+        //     case "TrustSet":
+        //         return accountTxMenu;
+        //     case "EnableAmendment":
+        //         return accountTxMenu;
+        //     case "SetFee":
+        //         return accountTxMenu;
+        //     case "AccountDelete":
+        //         return accountTxMenu;
+        //     default:
+        //         return accountTxMenu;
+        // }
+    }
+
     void SpawnLedgerBoxes(Ledger ledger)
     {
-        for (int i = 0; i < ledger.LedgerEntity.Transactions.Count; ++i) {  // X Axis
-            // LogText(string.Format("X Axis: {0} Y Axis: {1} Z Axis: {2}", xTmp, yTmp, zTmp));
-            GameObject ledgerBoxGO = Instantiate(ledgerPrefab, new Vector3(2, 4, 5), Quaternion.identity);
-            LedgerBox ledgerBox = ledgerBoxGO.GetComponent<LedgerBox> ();
-            ledgerBox.endPos = NextLedgerVector();
-            ledgerBox.debugMenu = debugMenu;
-            ledgerBox.transaction = ledger.LedgerEntity.Transactions[i];
-            ledgerGOList.Add(ledgerBoxGO);
+        try
+        {
+            for (int i = 0; i < ledger.LedgerEntity.Transactions.Count; ++i) {  // X Axis
+                HashOrTransaction tx = ledger.LedgerEntity.Transactions[i];
+                GameObject ledgerBoxGO = Instantiate(ledgerPrefab, new Vector3(2, 4, 5), Quaternion.identity);
+                LedgerBox ledgerBox = ledgerBoxGO.GetComponent<LedgerBox> ();
+                ledgerBox.endPos = NextLedgerVector();
+                ledgerBox.debugMenu = GetTxMenu(tx.Transaction.TransactionType.ToString());
+                ledgerBox.transaction = tx;
+                ledgerGOList.Add(ledgerBoxGO);
+            }
+        }
+        catch (Exception e)
+        {
+            LogText(String.Format("{0} SpawnLedgerBoxes caught", e));
         }
     }
 
