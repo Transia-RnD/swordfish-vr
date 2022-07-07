@@ -23,7 +23,6 @@ namespace BNG {
 
         public virtual void OnPointerClick(PointerEventData eventData) {
             // Don't call events if exceeded distance
-            Debug.Log("OnPointerClick");
             if(DistanceExceeded(eventData)) {
                 return;
             }
@@ -33,7 +32,6 @@ namespace BNG {
 
         public virtual void OnPointerEnter(PointerEventData eventData) {
             // Don't call events if exceeded distance
-            Debug.Log("OnPointerEnter");
             if (DistanceExceeded(eventData)) {
                 return;
             }
@@ -43,14 +41,12 @@ namespace BNG {
 
         public virtual void OnPointerExit(PointerEventData eventData) {
             // Can call OnPointerExit events even if exceeded distance
-            Debug.Log("OnPointerExit");
             OnPointerExitEvent?.Invoke(eventData);
         }
 
 
         public virtual void OnPointerDown(PointerEventData eventData) {
             // Don't call events if exceeded distance
-            Debug.Log("OnPointerDown");
             if (DistanceExceeded(eventData)) {
                 return;
             }
@@ -60,19 +56,16 @@ namespace BNG {
 
         public virtual void OnPointerUp(PointerEventData eventData) {
             // Can call OnPointerUp events even if exceeded distance
-            Debug.Log("OnPointerUp");
             OnPointerUpEvent?.Invoke(eventData);
         }
 
         public virtual bool DistanceExceeded(PointerEventData eventData) {
-            Debug.Log("DistanceExceeded");
+
             if(eventData == null) {
-                Debug.Log("null event data");
                 return false;
             }
 
             if(eventData.pointerCurrentRaycast.distance > MaxDistance) {
-                Debug.Log("past max distance");
                 return true;
             }
 

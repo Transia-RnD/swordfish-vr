@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ripple.Signing;
-using Ripple.TxSigning;
 using Swordfish;
 using IO.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RippleDotNet.Requests.Transaction;
-using RippleDotNet.Model.Transaction;
-using RippleDotNet.Requests.Ledger;
-using RippleDotNet.Model.Ledger;
-using RippleDotNet;
+using Xrpl.Client.Requests.Transaction;
+using Xrpl.Client.Model.Transaction;
+using Xrpl.Client.Requests.Ledger;
+using Xrpl.Client.Model.Ledger;
+using Xrpl.Client;
+using Xrpl.Wallet;
+using Ripple.Keypairs;
 using System.Threading.Tasks;
 
 public class XrpService : MonoBehaviour

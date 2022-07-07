@@ -11,7 +11,7 @@ using IO.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Converters;
-using RippleDotNet.Json.Converters;
+using Xrpl.Client.Json.Converters;
 
 public class AotTypeEnforcer : ScriptableObject
 {
@@ -48,7 +48,7 @@ public class AuthManager : ScriptableObject
 
     public void InitializeFirebase()
     {
-        LogText("SETUP FIREBASE AUTH");
+        // LogText("SETUP FIREBASE AUTH");
         app = Firebase.FirebaseApp.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
         // auth.StateChanged += AuthStateChanged;
@@ -59,30 +59,30 @@ public class AuthManager : ScriptableObject
 
     void AuthStateChanged(object sender, System.EventArgs eventArgs) 
     {
-        LogText("AUTH STATE CHANGED");
+        // LogText("AUTH STATE CHANGED");
         if (auth.CurrentUser != user) {
             bool signedIn = auth.CurrentUser != null;
             if (!signedIn && user != null) {
-                LogText("SIGNED OUT " + user.UserId);
+                // LogText("SIGNED OUT " + user.UserId);
                 SceneManager.LoadScene("SignInScene");
                 return;
             }
             user = auth.CurrentUser;
             if (signedIn) {
-                LogText("SIGNED IN " + user.UserId);
+                // LogText("SIGNED IN " + user.UserId);
                 _login(user);
                 return;
             }
         }
         else
         {
-            LogText("NOT LOGGED IN");
+            // LogText("NOT LOGGED IN");
             SceneManager.LoadScene("SignInScene");
         }
     }
     public async void _login(FirebaseUser user)
     {
-        LogText("LOGIN STARTED");
+        // LogText("LOGIN STARTED");
         // string token = await user.TokenAsync(true);
         // GameState.Instance.userIdToken = token;
 
@@ -93,7 +93,7 @@ public class AuthManager : ScriptableObject
         if (!userSnapshot.Exists) {
             LogText(String.Format("Document {0} does not exist!", userSnapshot.Id));
         } else {
-            LogText("VALID MASTER USER");
+            // LogText("VALID MASTER USER");
             Dictionary<string, object> userDict = userSnapshot.ToDictionary();
             DocumentReference playerRef = db.Collection("Players").Document(accountId);
             DocumentSnapshot playerSnapshot = await playerRef.GetSnapshotAsync();
@@ -102,7 +102,7 @@ public class AuthManager : ScriptableObject
             } else {
                 try
                 {
-                    LogText("VALID PLAYER");
+                    // LogText("VALID PLAYER");
                     Dictionary<string, object> playerDict = playerSnapshot.ToDictionary();
                     string serialized = JsonConvert.SerializeObject(playerDict);
                     Player selfPlayer = JsonConvert.DeserializeObject<Player>(serialized);

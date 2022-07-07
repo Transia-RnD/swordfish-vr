@@ -25,8 +25,7 @@ namespace BNG {
         void Start() {
             render = GetComponent<MeshRenderer>();
             initialMaterial = render.sharedMaterial;
-            render.sharedMaterial = ActiveMaterial;
-        }
+        }        
 
         // Holding down activate
         public void SetActive(PointerEventData eventData) {

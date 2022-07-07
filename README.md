@@ -37,7 +37,16 @@ Once complete, open the oculus application, click the game menu, then in the upp
 
 If Common Error
 
-`using CommonC = Unity.Burst.Intrinsics.Common;`
+Replace:
+
+`using Unity.Burst.Intrinsics;`
+
+With:
+
+```
+using Unity.Burst.Intrinsics;
+using CommonC = Unity.Burst.Intrinsics.Common;
+```
 
 Find: `Common.umul128`
 

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using RippleDotNet.Model.Ledger;
-using RippleDotNet;
-using Ripple.Core.Types;
-using RippleDotNet.Model;
-using RippleDotNet.Model.Transaction.TransactionTypes;
-using RippleDotNet.Requests.Transaction;
-using RippleDotNet.Responses.Transaction.Interfaces;
-using RippleDotNet.Responses.Transaction.TransactionTypes;
-using RippleDotNet.Extensions;
+using Xrpl.Client.Model.Ledger;
+using Xrpl.Client;
+using Ripple.Binary.Codec.Types;
+using Xrpl.Client.Model;
+using Xrpl.Client.Model.Transaction.TransactionTypes;
+using Xrpl.Client.Requests.Transaction;
+using Xrpl.Client.Responses.Transaction.Interfaces;
+using Xrpl.Client.Responses.Transaction.TransactionTypes;
+using Xrpl.Client.Extensions;
 using System.Threading.Tasks;
 using Ipfs.Http;
 using IO.Swagger.Model;
@@ -18,7 +18,6 @@ using IO.Swagger.Model;
 public class LedgerBox : MonoBehaviour
 {
 
-    public GameObject debugMenu;
     public Material PaymentMaterial;
     public Material TrustMaterial;
     public Material OfferMaterial;
@@ -40,14 +39,28 @@ public class LedgerBox : MonoBehaviour
     public string txId = "";
     public Vector3 endPos = new Vector3(0, 0, 0);
     public float speed = 8.0f;
-    public HashOrTransaction transaction;
+    public string hash;
+    public ITransactionResponseCommon transaction;
     // Start is called before the first frame update
 
-    void Start()
+    private static IRippleClient client;
+    private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
+    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+
+    async void Start()
     {
+        client = new RippleClient(serverUrl);
+        client.Connect();
         render = GetComponent<MeshRenderer>();
         initialMaterial = render.sharedMaterial;
         render.sharedMaterial = PaymentMaterial;
+        // await GetTransaction();
+    }
+    public async Task GetTransaction()
+    {
+        Debug.Log(string.Format("GET TRANSACTION: {0}", hash));
+        ITransactionResponseCommon itransaction = await client.Transaction(hash);
+        transaction = itransaction;
         UpdateMaterial();
     }
 
@@ -59,9 +72,9 @@ public class LedgerBox : MonoBehaviour
     }
 
     public void UpdateMaterial() {
-        if (transaction == null) { return; }
-        Debug.Log(transaction.Transaction.TransactionType.ToString());
-        switch (transaction.Transaction.TransactionType.ToString())
+        // if (transaction == null) { return; }
+        Debug.Log(transaction.TransactionType.ToString());
+        switch (transaction.TransactionType.ToString())
         {
             case "NFTokenMint":
                 render.sharedMaterial = NFTMaterial;
@@ -155,16 +168,14 @@ public class LedgerBox : MonoBehaviour
     }
 
     public void UpdateSwarm() {
-        MenuScript menuScript = debugMenu.GetComponent<MenuScript>() as MenuScript;
-        menuScript.transaction = transaction;
         if (active) {
-            debugMenu.SetActive(true);
+            // Debug.Log("ACTIVE");
         }
         else if (hovering) {
-            debugMenu.SetActive(true);
+            // Debug.Log("HOVERING");
         }
         else {
-            debugMenu.SetActive(false);
+            // Debug.Log("NONE");
         }
     }
 }

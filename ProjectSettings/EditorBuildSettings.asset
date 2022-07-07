@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SignUpScene.unity
     guid: 7830bae4f7fd44ee0a33aff5c9eb8ac0
-  - enabled: 0
-    path: Assets/Scenes/XRMultiMain.unity
-    guid: c071088de1a1a4bbd92d73bff25cdd30
   - enabled: 1
     path: Assets/Scenes/MetaXrplorer.unity
     guid: 85f53006f2d2e4b81bb84d8a3829da90

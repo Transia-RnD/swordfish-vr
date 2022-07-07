@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ripple.Signing;
+using Xrpl.Wallet;
 using Firebase.Firestore;
 using IO.Swagger.Model;
 using Newtonsoft.Json;

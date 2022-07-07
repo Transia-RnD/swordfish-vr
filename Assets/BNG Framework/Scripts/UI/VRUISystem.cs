@@ -79,6 +79,7 @@ namespace BNG {
 
         void init() {
             if(cameraCaster == null) {
+
                 // Create the camera required for the caster.
                 // We can reduce the fov and disable the camera component for performance
                 var go = new GameObject("CameraCaster");
@@ -254,9 +255,7 @@ namespace BNG {
         public virtual void AssignCameraToAllCanvases(Camera cam) {
             Canvas[] allCanvas = FindObjectsOfType<Canvas>();
             for (int x = 0; x < allCanvas.Length; x++) {
-                if (allCanvas[x].name != "HUDCanvas") {
-                    AddCanvasToCamera(allCanvas[x], cam);
-                }
+                AddCanvasToCamera(allCanvas[x], cam);
             }
         }
 

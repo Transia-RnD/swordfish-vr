@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ripple.Core.Types;
-using RippleDotNet.Model;
-using RippleDotNet.Model.Ledger;
-using RippleDotNet.Requests.Ledger;
-using RippleDotNet;
+using Ripple.Binary.Codec.Types;
+using Xrpl.Client.Model;
+using Xrpl.Client.Model.Ledger;
+using Xrpl.Client.Requests.Ledger;
+using Xrpl.Client;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 

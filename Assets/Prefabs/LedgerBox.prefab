@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9185279650881819796}
   - component: {fileID: 9185279650881819797}
   - component: {fileID: 9185279650881819798}
-  - component: {fileID: -7319325098776137584}
+  - component: {fileID: 9062511594480091234}
   m_Layer: 0
   m_Name: LedgerBox
   m_TagString: Untagged
@@ -130,11 +130,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6008095491162017262, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+          type: 3}
+        m_TargetAssemblyTypeName: BasePlayer, Assembly-CSharp
+        m_MethodName: SetHovering
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPointerExitEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9185279650881819798}
         m_TargetAssemblyTypeName: LedgerBox, Assembly-CSharp
+        m_MethodName: ResetHovering
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6008095491162017262, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+          type: 3}
+        m_TargetAssemblyTypeName: BasePlayer, Assembly-CSharp
         m_MethodName: ResetHovering
         m_Mode: 0
         m_Arguments:
@@ -160,11 +186,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6008095491162017262, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+          type: 3}
+        m_TargetAssemblyTypeName: BasePlayer, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPointerUpEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9185279650881819798}
         m_TargetAssemblyTypeName: LedgerBox, Assembly-CSharp
+        m_MethodName: SetInactive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6008095491162017262, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+          type: 3}
+        m_TargetAssemblyTypeName: BasePlayer, Assembly-CSharp
         m_MethodName: SetInactive
         m_Mode: 0
         m_Arguments:
@@ -187,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225009c16a7b4ea18bc60bfd9ff87df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMenu: {fileID: 0}
   PaymentMaterial: {fileID: 2100000, guid: cba66c276aed0874091de1c33eb3950d, type: 2}
   TrustMaterial: {fileID: 2100000, guid: c181c23a6120fbe4aadd5bb53a58dd78, type: 2}
   OfferMaterial: {fileID: 2100000, guid: 663834164c6a04740aaa1b778249ce7e, type: 2}
@@ -198,7 +249,7 @@ MonoBehaviour:
   txId: 
   endPos: {x: 0, y: 0, z: 0}
   speed: 7
---- !u!114 &-7319325098776137584
+--- !u!114 &9062511594480091234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,10 +258,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9185279650881819799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

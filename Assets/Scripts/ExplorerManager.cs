@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Ripple.Core.Types;
-using RippleDotNet.Model;
-using RippleDotNet.Json.Converters;
-using RippleDotNet.Model.Ledger;
-using RippleDotNet.Requests.Ledger;
-using RippleDotNet.Model.Account;
-using RippleDotNet.Requests.Account;
-using RippleDotNet;
+using Ripple.Binary.Codec.Types;
+using Xrpl.Client.Model;
+using Xrpl.Client.Json.Converters;
+using Xrpl.Client.Model.Ledger;
+using Xrpl.Client.Requests.Ledger;
+using Xrpl.Client.Model.Account;
+using Xrpl.Client.Model.Account;
+using Xrpl.Client.Requests.Account;
+using Xrpl.Client;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Utilities;
@@ -68,12 +69,12 @@ public class ExplorerManager : MonoBehaviour
             client = new RippleClient(serverUrl);
             client.Connect();
             LogText("XRPL CONNECTED");
-            // InvokeRepeating("AddLedger", 2.0f, 4.0f);
+            InvokeRepeating("AddLedger", 2.0f, 4.0f);
             // Player selfPlayer = GameState.Instance.selfPlayer;
-            LogText(String.Format("PLAYER ADDRESS {0}", "r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH"));
-            AccountInfo accountInfo = await client.AccountInfo("r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH");
-            decimal currencyTotal = (decimal)accountInfo.AccountData.Balance.ValueAsXrp;
-            LogText(String.Format("ACCOUNT CURRENCY {0}", currencyTotal));
+            // LogText(String.Format("PLAYER ADDRESS {0}", "r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH"));
+            // AccountInfo accountInfo = await client.AccountInfo("r223rsyz1cfqPbjmiX6oYu1hFgNwCkWZH");
+            // decimal currencyTotal = (decimal)accountInfo.AccountData.Balance.ValueAsXrp;
+            // LogText(String.Format("ACCOUNT CURRENCY {0}", currencyTotal));
             // await AddLedger();
         }
         catch (Exception e)
@@ -96,15 +97,16 @@ public class ExplorerManager : MonoBehaviour
             var request = new LedgerRequest {
                 LedgerIndex = new LedgerIndex(LedgerIndexType.Validated),
                 Transactions = true,
-                Expand = true
+                Binary = true
             };
             LogText("LEDGER REQUEST");
             BaseLedgerInfo closedLedger = await client.ClosedLedger();
             LogText("RECEIVED LEDGER");
-            // LogText(string.Format("Closed Ledger: {0}", closedLedger.LedgerHash));
+            LogText(string.Format("Closed Ledger: {0}", closedLedger.LedgerHash));
             request.LedgerHash = closedLedger.LedgerHash;
             Ledger ledger = await client.Ledger(request);
-            // LogText(string.Format("TXs: {0}", ledger.LedgerEntity.Transactions.Count));
+            LedgerBinaryEntity entity = (LedgerBinaryEntity)ledger.LedgerEntity;
+            LogText(string.Format("TXs: {0}", entity.Transactions));
             if (!ledgerList.Contains(ledger))
             {
                 ledgerList.Add(ledger);
@@ -210,13 +212,13 @@ public class ExplorerManager : MonoBehaviour
     {
         try
         {
-            for (int i = 0; i < ledger.LedgerEntity.Transactions.Count; ++i) {  // X Axis
-                HashOrTransaction tx = ledger.LedgerEntity.Transactions[i];
+            LedgerBinaryEntity entity = (LedgerBinaryEntity)ledger.LedgerEntity;
+            for (int i = 0; i < entity.Transactions.Count; ++i) {  // X Axis
+                string hash = entity.Transactions[i];
                 GameObject ledgerBoxGO = Instantiate(ledgerPrefab, new Vector3(2, 4, 5), Quaternion.identity);
                 LedgerBox ledgerBox = ledgerBoxGO.GetComponent<LedgerBox> ();
                 ledgerBox.endPos = NextLedgerVector();
-                ledgerBox.debugMenu = GetTxMenu(tx.Transaction.TransactionType.ToString());
-                ledgerBox.transaction = tx;
+                ledgerBox.hash = hash;
                 ledgerGOList.Add(ledgerBoxGO);
             }
         }

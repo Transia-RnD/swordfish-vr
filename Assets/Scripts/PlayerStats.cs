@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ripple.Core.Types;
-using RippleDotNet.Model;
-using RippleDotNet.Model.Account;
-using RippleDotNet.Requests.Account;
-using RippleDotNet;
+using Ripple.Binary.Codec.Types;
+using Xrpl.Client.Model;
+using Xrpl.Client.Model.Account;
+using Xrpl.Client.Requests.Account;
+using Xrpl.Client;
 using System.Threading.Tasks;
 using Swordfish;
 using IO.Swagger.Model;

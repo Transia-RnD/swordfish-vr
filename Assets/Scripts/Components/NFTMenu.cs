@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using RippleDotNet;
-using RippleDotNet.Model.Ledger;
+using Xrpl.Client;
+using Xrpl.Client.Model.Ledger;
 using Ipfs.Http;
 using IO.Swagger.Model;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
 
-// using RippleDotNet.Responses.Transaction.Interfaces;
-// using RippleDotNet.Responses.Transaction.TransactionTypes;
+// using Xrpl.Client.Responses.Transaction.Interfaces;
+// using Xrpl.Client.Responses.Transaction.TransactionTypes;
 
 public class NFTMenu : MonoBehaviour
 {

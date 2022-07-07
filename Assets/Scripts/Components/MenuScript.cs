@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using RippleDotNet;
-using RippleDotNet.Model.Ledger;
+using Xrpl.Client;
+using Xrpl.Client.Model.Ledger;
 using Ipfs.Http;
 using IO.Swagger.Model;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
 
-// using RippleDotNet.Responses.Transaction.Interfaces;
-// using RippleDotNet.Responses.Transaction.TransactionTypes;
+// using Xrpl.Client.Responses.Transaction.Interfaces;
+// using Xrpl.Client.Responses.Transaction.TransactionTypes;
 
 public class MenuScript : MonoBehaviour
 {
     public HashOrTransaction transaction;
     public GameObject DebugText;
 
-    private static IRippleClient client;
+    // private static IRippleClient client;
     // private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
-    private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
 
-    public IpfsClient ipfs;
+    // public IpfsClient ipfs;
 
     // public Material nftImage;
     public RawImage nftImage;
@@ -34,9 +34,9 @@ public class MenuScript : MonoBehaviour
         // Debug.Log(transaction.TransactionHash);
         // ShowDefault();
 
-        client = new RippleClient(serverUrl);
-        client.Connect();
-        await GetTransaction();
+        // client = new RippleClient(serverUrl);
+        // client.Connect();
+        // await GetTransaction();
     }
 
     void ShowPayment()
@@ -64,12 +64,12 @@ public class MenuScript : MonoBehaviour
 
     }
 
-    public async Task GetTransaction()
-    {
+    // public async Task GetTransaction()
+    // {
         // TransactionResponseCommon rtransaction = await client.Transaction(transaction.Transaction.TransactionHash);
         // ITransactionResponseCommon response = await client.Transaction("97DB76DC957E9CAFDB01435E7227AC4B5D455467BCFE1876F0C4700C3B3BCCF8");
         // NFTokenMintTransactionResponse rtransaction = (NFTokenMintTransactionResponse)transaction.Transaction;
         // NFTokenMintTransactionResponse rtransaction = (NFTokenMintTransactionResponse)response;
         
-    }
+    // }
 }
