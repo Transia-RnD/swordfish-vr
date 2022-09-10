@@ -17,7 +17,6 @@ public class PlayerStats : CharacterStats
     private Player selfPlayer;
     
     private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
-    //private static string serverUrl = "wss://s1.ripple.com:443";
 
     // Start is called before the first frame update
     private async void Awake()

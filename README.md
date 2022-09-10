@@ -2,7 +2,7 @@
 
 ## Developers
 
-### Request access to Samy Developer
+### Request access to Transia Developer
 
 > Connect your oculus 2 to your laptop with the c-usb cord provided.
 
@@ -24,7 +24,7 @@ https://sidequestvr.com/setup-howto
 
 ### Clone the git repo
 
-`git clone https://github.com/Harp-Angell-Labs/swordfish-vr.git`
+`git clone https://github.com/Transia-RnD/swordfish-vr.git`
 
 ### Install the app
 

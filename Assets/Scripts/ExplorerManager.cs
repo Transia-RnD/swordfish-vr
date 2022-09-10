@@ -42,8 +42,7 @@ public class ExplorerManager : MonoBehaviour
     private List<GameObject> ledgerGOList = new List<GameObject>();
 
     private static IRippleClient client;
-    private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
-    // private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+    private static string serverUrl = "wss://hooks-testnet-v2.xrpl-labs.com";
 
     private List<string> transactions = new List<string>();
 
