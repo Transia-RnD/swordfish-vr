@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Xrpl.Wallet;
 using Firebase;
 using Firebase.Firestore;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
+using AppWallet = GalleryCSharp.Models.Wallet;
 using Newtonsoft.Json;
 
 public class WalletService : MonoBehaviour
@@ -14,7 +14,7 @@ public class WalletService : MonoBehaviour
 
     public string errorPointer;
 
-    public void CreateWallet(Wallet wallet, string xummToken)
+    public void CreateWallet(AppWallet wallet, string xummToken)
     {
         defaultStore = FirebaseFirestore.DefaultInstance;
         // GambitAnalytics.creatingWallet()
@@ -37,8 +37,8 @@ public class WalletService : MonoBehaviour
         // }
         string signorAddress = wallet.Address;
         
-        DocumentReference newPlayerRef = defaultStore.Collection("Players").Document(playerClone.PlayerId);
-        DocumentReference newPlayerRefRef = defaultStore.Collection("PlayerRefs").Document(playerClone.PlayerId);
+        DocumentReference newPlayerRef = defaultStore.Collection("Players").Document(playerClone.Id);
+        DocumentReference newPlayerRefRef = defaultStore.Collection("PlayerRefs").Document(playerClone.Id);
         DocumentReference clonePlayerRef = newPlayerRef.Collection("LegacyPlayers").Document();
         DocumentReference newWalletRef = newPlayerRef.Collection("Wallets").Document(signorAddress);
         
@@ -97,7 +97,7 @@ public class WalletService : MonoBehaviour
                         PlayerService.ParsePlayerRef(PlayerService.CloneRef(playerClone), null)
                     );
                     
-                    wallet.WalletId = newWalletRef.Id;
+                    wallet.Id = newWalletRef.Id;
                     wallet.Active = true;
                     wallet.CreatedTime = updatedTime;
                     transaction.Set(
@@ -136,13 +136,13 @@ public class WalletService : MonoBehaviour
         });
     }
 
-    public static Wallet GetWalletFromSnapshot(DocumentSnapshot snapshot, string walletId)
+    public static AppWallet GetWalletFromSnapshot(DocumentSnapshot snapshot, string walletId)
     {   
         Dictionary<string, object> snapData = snapshot.ToDictionary();
         string serialized = JsonConvert.SerializeObject(snapData);
         return JsonConvert.DeserializeObject<Wallet>(serialized);
     }
-    public static Dictionary<string, object> ParseWallet(Wallet wallet, DocumentReference oldWalletRef)
+    public static Dictionary<string, object> ParseWallet(AppWallet wallet, DocumentReference oldWalletRef)
     {
         // wallet.oldWalletRef = oldWalletRef;
         return JsonConvert.DeserializeObject<Dictionary<string, object>>(wallet.ToJson());

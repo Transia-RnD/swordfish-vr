@@ -1,19 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ripple.Binary.Codec.Types;
-using Xrpl.Client.Model;
-using Xrpl.Client.Model.Account;
-using Xrpl.Client.Requests.Account;
-using Xrpl.Client;
 using System.Threading.Tasks;
 using Swordfish;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
+using Xrpl.Client;
+using Xrpl.Models.Methods;
 
 public class PlayerStats : CharacterStats
 {
     PlayerUI playerUI;
-    private static IRippleClient client;
+    private static IXrplClient client;
     private Player selfPlayer;
     
     private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
@@ -33,7 +30,7 @@ public class PlayerStats : CharacterStats
         maxStamina = 100;
         currStamina = maxStamina;
 
-        client = new RippleClient(serverUrl);
+        client = new XrplClient(serverUrl);
         client.Connect();
         await GetAccountInfo();
 
@@ -45,7 +42,8 @@ public class PlayerStats : CharacterStats
 
     public async Task GetAccountInfo()
     {
-        AccountInfo accountInfo = await client.AccountInfo(selfPlayer.DefaultSignor);
+        AccountInfoRequest request = new AccountInfoRequest(selfPlayer.DefaultSignor);
+        AccountInfo accountInfo = await client.AccountInfo(request);
         currencyTotal = (decimal)accountInfo.AccountData.Balance.ValueAsXrp;
         SetStats ();
         client.Disconnect();

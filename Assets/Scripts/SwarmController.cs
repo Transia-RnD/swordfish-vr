@@ -4,11 +4,8 @@ using System;
 using Plugins.SwarmUi;
 using UnityEditor;
 using UnityEngine;
-using Ripple.Binary.Codec.Types;
-using Xrpl.Client.Model;
-using Xrpl.Client.Model.Account;
-using Xrpl.Client.Requests.Account;
 using Xrpl.Client;
+using Xrpl.Models.Methods;
 
 
 // [CustomEditor(typeof(SwarmController))]
@@ -26,7 +23,7 @@ using Xrpl.Client;
 public class SwarmController : MonoBehaviour
 {
 
-    private static IRippleClient client;
+    private static IXrplClient client;
     private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
     public string rootAccount = "rYTGjwGcbGRgxrdL3jBy62jnWtdV8UUmh";
     public int layerCount = 5;
@@ -61,7 +58,7 @@ public class SwarmController : MonoBehaviour
 
     private async void Awake()
     {
-        client = new RippleClient(serverUrl);
+        client = new XrplClient(serverUrl);
         client.Connect();
         GetAccount();
     }
@@ -170,7 +167,8 @@ public class SwarmController : MonoBehaviour
     }
     async void GetAccount()
     {
-        AccountNFTs accountNFTs = await client.AccountNFTs(rootAccount);
+        AccountNFTsRequest request = new AccountNFTsRequest(rootAccount);
+        AccountNFTs accountNFTs = await client.AccountNFTs(request);
         Debug.Log(accountNFTs.NFTs);
         for (int i = 0; i < accountNFTs.NFTs.Count; ++i) {
             nftList.Add(accountNFTs.NFTs[i].URIAsString);

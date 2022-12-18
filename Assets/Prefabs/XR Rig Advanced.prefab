@@ -482,7 +482,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 4418897904754512135}
   handPoser: {fileID: 670684601625417060}
   autoPoser: {fileID: 6175198764876701254}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 3343187456744949855}
   GripAmount: 0
@@ -718,6 +719,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 3914061810424526286}
@@ -5711,7 +5715,7 @@ Transform:
   m_LocalPosition: {x: 0.0208, y: 0.0366, z: 0.1242}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8080767336041293503}
+  - {fileID: 2548404261285069643}
   m_Father: {fileID: 8195358019478103693}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6898,6 +6902,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 5926505646280769518}
@@ -13699,6 +13706,7 @@ MonoBehaviour:
   HandSide: 1
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 0.5
@@ -13848,6 +13856,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1507933709417177396
 GameObject:
   m_ObjectHideFlags: 0
@@ -14036,6 +14049,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &9091580596926491116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20410,6 +20428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveCharacterWithCamera: 1
   RotateCharacterWithCamera: 1
+  ResizeCharacterHeightWithCamera: 1
   TrackingSpace: {fileID: 2878010901339210916}
   CameraRig: {fileID: 2878010901339280094}
   CenterEyeAnchor: {fileID: 2878010901339280090}
@@ -21452,6 +21471,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 6939455919901318185}
@@ -22940,6 +22962,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 2421332278263321117}
@@ -23415,6 +23440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
@@ -25795,6 +25821,16 @@ MonoBehaviour:
   RightThumbstickAxis: {x: 0, y: 0}
   LeftTouchPadAxis: {x: 0, y: 0}
   RightTouchPadAxis: {x: 0, y: 0}
+  LeftThumbCurl: 0
+  LeftIndexCurl: 0
+  LeftMiddleCurl: 0
+  LeftRingCurl: 0
+  LeftPinkyCurl: 0
+  RightThumbCurl: 0
+  RightIndexCurl: 0
+  RightMiddleCurl: 0
+  RightRingCurl: 0
+  RightPinkyCurl: 0
   ConnectedControllerType: 0
   HMDActive: 0
   SupportsBothTouchPadAndJoystick: 0
@@ -25831,6 +25867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmulatorEnabled: 1
+  EditorOnly: 1
+  RequireGameFocus: 1
   EmulatorActionSet: {fileID: -944628639613478452, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   ForceStraightTeleportRotation: 1
@@ -25864,7 +25902,6 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
-  RequireGameFocus: 1
 --- !u!114 &6008095491162017262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25877,7 +25914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f08bd23b1ca742f6b17ebc3fe356341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnMenu: {fileID: 4255863351456071740}
+  menuHolder: {fileID: 0}
 --- !u!1 &2878010901338787570
 GameObject:
   m_ObjectHideFlags: 0
@@ -29411,6 +29448,7 @@ MonoBehaviour:
   HandSide: 0
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 0.5
@@ -29560,6 +29598,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &3292924616427521712
 GameObject:
   m_ObjectHideFlags: 0
@@ -32025,6 +32068,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 0}
@@ -32395,6 +32441,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 4353924465517048895}
@@ -32600,6 +32649,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 4566879989380772244}
   ThumbJoints:
   - {fileID: 4566879989380772282}
@@ -32799,6 +32851,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 5469818116557470411}
   ThumbJoints:
   - {fileID: 5469818116557470437}
@@ -36367,6 +36422,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 5833538490589007898}
@@ -36770,6 +36828,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 7495598855809635357}
@@ -38897,6 +38958,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 3176049033947829196}
@@ -41307,6 +41371,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &5303283767377397508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45390,6 +45459,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 4199731437602504994}
@@ -47641,7 +47713,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 5629184272580142039}
   handPoser: {fileID: 2156673698331899459}
   autoPoser: {fileID: 4268688619406932002}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 1136233267053717086}
   GripAmount: 0
@@ -47877,6 +47950,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 6631663759872395027}
@@ -48927,6 +49003,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 7322949835916108181}
@@ -51674,6 +51753,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &5536006209847839540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51870,6 +51954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
@@ -56067,6 +56152,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &3915262509829208894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59661,7 +59751,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 1919138497919942687}
   handPoser: {fileID: 6386649182026428943}
   autoPoser: {fileID: 3806272650301595092}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 1136233267053717086}
   GripAmount: 0
@@ -59688,6 +59779,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 481021291362364427}
   ThumbJoints:
   - {fileID: 8546720862125660979}
@@ -62845,6 +62939,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 5078351063217429583}
@@ -64333,6 +64430,7 @@ MonoBehaviour:
   HandSide: 0
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 0.5
@@ -64482,6 +64580,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &7102618688962877107
 GameObject:
   m_ObjectHideFlags: 0
@@ -70768,6 +70871,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 0}
   ThumbJoints:
   - {fileID: 6211518131670359201}
@@ -73235,7 +73341,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 0}
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   GripAmount: 0
@@ -73454,7 +73561,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 0}
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 0}
   GripAmount: 0
@@ -74250,6 +74358,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 0
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &7687292732818610357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75316,6 +75429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
@@ -75556,6 +75670,7 @@ MonoBehaviour:
   HandSide: 1
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 0.5
@@ -75705,6 +75820,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &8428011755721611387
 GameObject:
   m_ObjectHideFlags: 0
@@ -76230,6 +76350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
@@ -78701,7 +78822,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 8394569557050074643}
   handPoser: {fileID: 5845671039668204900}
   autoPoser: {fileID: 6831964574290512854}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 3343187456744949855}
   GripAmount: 0
@@ -78728,6 +78850,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 4661421196223657589}
   ThumbJoints:
   - {fileID: 1351614163199392161}
@@ -81775,259 +81900,163 @@ Transform:
   m_Father: {fileID: 4236465096605274140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4783037490297443824
+--- !u!1001 &1232196813132476420
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 3289210809687556350}
     m_Modifications:
-    - target: {fileID: 2676914989931414385, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.9999989
-      objectReference: {fileID: 0}
-    - target: {fileID: 2676914989931414385, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907583047358500622, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907583047358500622, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907583047358500622, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 35.666668
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907583047358500622, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 530
-      objectReference: {fileID: 0}
-    - target: {fileID: 2907583047358500622, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -103.50001
-      objectReference: {fileID: 0}
-    - target: {fileID: 3102957744848080127, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 979689784883755415, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_Size
-      value: 0.9999989
-      objectReference: {fileID: 0}
-    - target: {fileID: 3263049241447908874, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.005590273
-      objectReference: {fileID: 0}
-    - target: {fileID: 3332966969459964725, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3332966969459964725, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 979689784883755415, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
-      propertyPath: m_AnchorMin.y
+      propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3332966969459964725, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 35.666668
-      objectReference: {fileID: 0}
-    - target: {fileID: 3332966969459964725, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 530
-      objectReference: {fileID: 0}
-    - target: {fileID: 3332966969459964725, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 1985286207351108835, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -47.833336
+      value: -0.003950089
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 1280
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 960
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.077
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.76771724
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.1811568
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.59821945
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.1411593
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.018981934
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.0069885254
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 6.273
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -77.29401
       objectReference: {fileID: 0}
-    - target: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -25.855
       objectReference: {fileID: 0}
-    - target: {fileID: 5615146328561348632, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 4650898940576663693, guid: 812ed3c868c27489eb45602c4c296bea,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860271091022516669, guid: 812ed3c868c27489eb45602c4c296bea,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860271091022516669, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5615146328561348632, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615146328561348632, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 35.666668
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615146328561348632, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 530
-      objectReference: {fileID: 0}
-    - target: {fileID: 5615146328561348632, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -159.16667
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243670883399622195, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243670883399622195, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243670883399622195, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 35.666668
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243670883399622195, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 530
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243670883399622195, guid: 03920090490194904821d5b09a672ad1,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -214.83334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8750246041899144652, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 8750246041899144652, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_Name
-      value: DebugMenu
+      value: CommonTxMenu
       objectReference: {fileID: 0}
-    - target: {fileID: 8750246041899144652, guid: 03920090490194904821d5b09a672ad1,
+    - target: {fileID: 8750246041899144652, guid: 812ed3c868c27489eb45602c4c296bea,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 03920090490194904821d5b09a672ad1, type: 3}
---- !u!1 &4255863351456071740 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8750246041899144652, guid: 03920090490194904821d5b09a672ad1,
-    type: 3}
-  m_PrefabInstance: {fileID: 4783037490297443824}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &8080767336041293503 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 812ed3c868c27489eb45602c4c296bea, type: 3}
+--- !u!224 &2548404261285069643 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3622130318390866767, guid: 03920090490194904821d5b09a672ad1,
+  m_CorrespondingSourceObject: {fileID: 3622130318390866767, guid: 812ed3c868c27489eb45602c4c296bea,
     type: 3}
-  m_PrefabInstance: {fileID: 4783037490297443824}
+  m_PrefabInstance: {fileID: 1232196813132476420}
   m_PrefabAsset: {fileID: 0}

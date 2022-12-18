@@ -6,20 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/BNG Framework/Scenes/XR Demo.unity
-    guid: a1360534006d3f845bc79b46b93cfec5
+    path: Assets/Scenes/LoadingScene.unity
+    guid: d2804c48f8bab471ea20db258689ef1b
   - enabled: 1
-    path: Assets/BNG Framework/Scenes/Scene Transitioning.unity
-    guid: 9d7c9629abf9c99449e358b0938b47d0
+    path: Assets/Scenes/SignInScene.unity
+    guid: d68cec8d2100e4f75a342b51fe3f148a
   - enabled: 1
-    path: Assets/BNG Framework/Scenes/Physics Hands.unity
-    guid: 34a4579517c578e4080d0a6ef2c96294
+    path: Assets/Scenes/SignUpScene.unity
+    guid: 7830bae4f7fd44ee0a33aff5c9eb8ac0
   - enabled: 1
-    path: Assets/BNG Framework/Scenes/Rigidbody Player.unity
-    guid: 57fc97c5771a777449aa8bd02514df22
+    path: Assets/Scenes/XRMultiGallery.unity
+    guid: c071088de1a1a4bbd92d73bff25cdd30
   - enabled: 1
-    path: Assets/BNG Framework/Scenes/Vehicle Example.unity
-    guid: d96233ee44d985d4fb8dc23a907c06eb
+    path: Assets/Scenes/MetaXrplorer.unity
+    guid: 85f53006f2d2e4b81bb84d8a3829da90
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6fe3ca064fb02430d8349daf0787be98,
       type: 2}
@@ -27,7 +27,7 @@ EditorBuildSettings:
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 7c0d65f8139523c47a3ac0b1587ccdf6,
       type: 2}
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: bc87842975b39e54c9a8257bb65aef55,
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 69f5915512d2c4a1fb561ebc84c157f5,
       type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 2ae0a4a226e8d9e4aba56d1e2eb3977b,
       type: 2}

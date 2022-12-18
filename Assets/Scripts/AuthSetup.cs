@@ -13,14 +13,15 @@ public class AuthSetup : MonoBehaviour
   
   void Start()
     {
+        LogText("START...");
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
             var dependencyStatus = task.Result;
-            // LogText(System.String.Format(
-            //     "STATUS: {0}",
-            //     dependencyStatus
-            // ));
+            LogText(System.String.Format(
+                "STATUS: {0}",
+                dependencyStatus
+            ));
             if (dependencyStatus == Firebase.DependencyStatus.Available) {
-                // LogText("INITIALIZING");
+                LogText("INITIALIZING");
                 authManager.DebugText = DebugText;
                 authManager.InitializeFirebase();
             } else {

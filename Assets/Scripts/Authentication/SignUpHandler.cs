@@ -16,6 +16,7 @@ public class SignUpHandler : MonoBehaviour
   public InputField emailTextBox;
   public InputField passwordTextBox;
   public Button signupButton;
+  public Button backButton;
   public Text emailErrorText;
   public Text passwordErrorText;
   public FirebaseAuth auth;
@@ -27,7 +28,7 @@ public class SignUpHandler : MonoBehaviour
     passwordTextBox.text = "123456";
     auth = FirebaseAuth.DefaultInstance;
     signupButton.onClick.AddListener(() => RegisterButton());
-    // backButton.onClick.AddListener(() => SceneManager.LoadScene("SignInScene"));
+    backButton.onClick.AddListener(() => SceneManager.LoadScene("SignInScene"));
   }
   public void Update()
   {
@@ -49,47 +50,6 @@ public class SignUpHandler : MonoBehaviour
         passwordTextBox.text
     ));
   }
-
-  // Create a user with the email and password.
-  // public Task CreateUserWithEmailAsync() {
-  //   string email = emailTextBox.text;
-  //   string password = passwordTextBox.text;
-
-  //   Debug.Log(String.Format("Attempting to create user {0}...", email));
-  //   DisableUI();
-
-  //   return auth.CreateUserWithEmailAndPasswordAsync(email, password)
-  //     .ContinueWithOnMainThread((task) => {
-  //       EnableUI();
-  //       LogTaskCompletion(task, "User Creation");
-  //       return task;
-  //     }).Unwrap();
-  // }
-
-  // // Log the result of the specified task, returning true if the task
-  // // completed successfully, false otherwise.
-  // protected bool LogTaskCompletion(Task task, string operation) {
-  //   bool complete = false;
-  //   if (task.IsCanceled) {
-  //     Debug.Log(operation + " canceled.");
-  //   } else if (task.IsFaulted) {
-  //     Debug.Log(operation + " encounted an error.");
-  //     foreach (Exception exception in task.Exception.Flatten().InnerExceptions) {
-  //       string authErrorCode = "";
-  //       Firebase.FirebaseException firebaseEx = exception as Firebase.FirebaseException;
-  //       if (firebaseEx != null) {
-  //         authErrorCode = String.Format("AuthError.{0}: ",
-  //           ((Firebase.Auth.AuthError)firebaseEx.ErrorCode).ToString());
-  //         GetErrorMessage((Firebase.Auth.AuthError)firebaseEx.ErrorCode);
-  //       }
-  //       Debug.Log(authErrorCode + exception.ToString());
-  //     }
-  //   } else if (task.IsCompleted) {
-  //     Debug.Log(operation + " completed");
-  //     complete = true;
-  //   }
-  //   return complete;
-  // }
 
   private IEnumerator Register(string _email, string password)
   {
@@ -122,6 +82,7 @@ public class SignUpHandler : MonoBehaviour
     // confirmPasswordTextBox.DeactivateInputField();
     // backButton.interactable = false;
     signupButton.interactable = false;
+    backButton.interactable = false;
     // emailErrorText.enabled = false;
     // passwordErrorText.enabled = false;
   }
@@ -133,6 +94,7 @@ public class SignUpHandler : MonoBehaviour
     // confirmPasswordTextBox.ActivateInputField();
     // backButton.interactable = true;
     signupButton.interactable = true;
+    backButton.interactable = true;
   }
 
   // private void GetErrorMessage(AuthError errorCode)

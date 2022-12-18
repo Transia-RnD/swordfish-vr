@@ -33,23 +33,3 @@ In sidequest click the "upload sdk" button in the top right corner.
 Chose the `Swordfish.apk` from the downloaded repo. (If the apk was not included visit the tag or release file for the source code)
 
 Once complete, open the oculus application, click the game menu, then in the upper right, select the drop down and choose unknown developer.
-
-
-If Common Error
-
-Replace:
-
-`using Unity.Burst.Intrinsics;`
-
-With:
-
-```
-using Unity.Burst.Intrinsics;
-using CommonC = Unity.Burst.Intrinsics.Common;
-```
-
-Find: `Common.umul128`
-
-Replace: `CommonC.umul128`
-
-ALL MUST BE DONE IN ONE SAVE NOT 2

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../XrplCSharp"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../../UnityXRPLC"
+		},
+		{
+			"path": "../../../swordfish/unity/swordfish-cs"
+		}
+	],
+	"settings": {}
+}

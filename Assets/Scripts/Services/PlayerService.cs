@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Xrpl.Wallet;
 using Firebase.Firestore;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using Newtonsoft.Json;
+using Xrpl.Wallet;
 
 public class PlayerService : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class PlayerService : MonoBehaviour
     public static PlayerRef CloneRef(Player player)
     {
         return new PlayerRef(
-            playerId: player.PlayerId,
+            id: player.Id,
             active: true,
             deleted: false,
             createdTime: Convert.ToInt32(Utils.UnixTimeNow()),

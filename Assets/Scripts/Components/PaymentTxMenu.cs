@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Xrpl.Client;
-using Xrpl.Client.Model.Ledger;
 using Ipfs.Http;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
-
-using Xrpl.Client.Responses.Transaction.Interfaces;
-using Xrpl.Client.Responses.Transaction.TransactionTypes;
+using Xrpl.Models.Ledger;
 
 public class PaymentTxMenu : MonoBehaviour
 {

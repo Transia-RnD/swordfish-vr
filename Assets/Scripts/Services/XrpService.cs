@@ -2,46 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Swordfish;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Xrpl.Client.Requests.Transaction;
-using Xrpl.Client.Model.Transaction;
-using Xrpl.Client.Requests.Ledger;
-using Xrpl.Client.Model.Ledger;
+using System.Threading.Tasks;
+using AppWallet = GalleryCSharp.Models.Wallet;
 using Xrpl.Client;
 using Xrpl.Wallet;
-using Ripple.Keypairs;
-using System.Threading.Tasks;
 
 public class XrpService : MonoBehaviour
 {
-    private static IRippleClient client;
-    private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
+    private static IXrplClient client;
+    private static string serverUrl = "wss://hooks-testnet-v2.xrpl-labs.com";
 
     public void Awake()
     {
-        client = new RippleClient(serverUrl);
+        client = new XrplClient(serverUrl);
         client.Connect();
     }
 
-    public Wallet CreateXrpWallet(string secret)
+    public AppWallet CreateXrpWallet(string secret)
     {
-        Seed seed = Seed.FromPassPhrase("taco main silly string happened town dollar toon").SetEd25519();
-        string signorAddress = seed.KeyPair().Id();
+        XrplWallet xwallet = XrplWallet.Generate();
+        string signorAddress = xwallet.ClassicAddress;
 
-        Wallet wallet = new Wallet(
-            walletId: "null",
+        AppWallet wallet = new AppWallet(
+            id: "null",
             active: true,
             deleted: false,
             createdTime: 0,
             address: signorAddress,
-            name: "Gambit_Xrp_Wallet",
+            name: "MetaXrplorer_Xrp_Wallet",
             isHd: false,
             isPrivate: false
         );
         string encryptedSeed = AESGCM.SimpleEncryptWithPassword(
-            seed.ToString(),
+            xwallet.Seed.ToString(),
             secret
         );
         string encryptedSecret = AESGCM.SimpleEncryptWithPassword(
@@ -59,28 +55,28 @@ public class XrpService : MonoBehaviour
     //     return await client.Ledger();
     // }
     
-    public SignedTx XrpSignTransaction(string destination, string amount)
-    {
-        string secret = "sEd7rBGm5kxzauRTAV2hbsNz7N45X91";
-        Dictionary<string, object> txJson = new Dictionary<string, object>() {
-            { "Account", "Account" },
-            { "Amount",  amount },
-            { "Destination", destination },
-            { "Fee", "10" },
-            { "Flags", "2147483648" }, 
-            { "Sequence", "1" },
-            { "TransactionType", "Payment" },
-        };
-        string unsignedTxJson = JsonConvert.SerializeObject(txJson);
-        return TxSigner.SignJson(JObject.Parse(unsignedTxJson), secret);
-    }
+    // public SignedTx XrpSignTransaction(string destination, string amount)
+    // {
+    //     string secret = "sEd7rBGm5kxzauRTAV2hbsNz7N45X91";
+    //     Dictionary<string, object> txJson = new Dictionary<string, object>() {
+    //         { "Account", "Account" },
+    //         { "Amount",  amount },
+    //         { "Destination", destination },
+    //         { "Fee", "10" },
+    //         { "Flags", "2147483648" }, 
+    //         { "Sequence", "1" },
+    //         { "TransactionType", "Payment" },
+    //     };
+    //     string unsignedTxJson = JsonConvert.SerializeObject(txJson);
+    //     return wallet.Sign(unsignedTxJson);
+    // }
 
-    public async Task<Submit> XrpSubmitTransaction(RippleClient client, SignedTx signedTx)
-    {
-        SubmitBlobRequest request = new SubmitBlobRequest();
-        request.TransactionBlob = signedTx.TxBlob;
-        return await client.SubmitTransactionBlob(request);
-    }
+    // public async Task<Submit> XrpSubmitTransaction(RippleClient client, SignedTx signedTx)
+    // {
+    //     SubmitBlobRequest request = new SubmitBlobRequest();
+    //     request.TransactionBlob = signedTx.TxBlob;
+    //     return await client.SubmitTransactionBlob(request);
+    // }
 
     public string GetNFTFromTokenId(string tokenId)
     {

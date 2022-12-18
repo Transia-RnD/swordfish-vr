@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using Firebase;
 using Firebase.Auth;
 using Firebase.Firestore;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Utilities;
 using Newtonsoft.Json.Converters;
@@ -22,7 +22,7 @@ public class AotTypeEnforcer : ScriptableObject
         // AotHelper.EnsureType<GenericStringConverter<T>>();
         AotHelper.EnsureType<LedgerBinaryConverter>();
         AotHelper.EnsureType<LedgerIndexConverter>();
-        AotHelper.EnsureType<LedgerObjectConverter>();
+        AotHelper.EnsureType<LOConverter>();
         AotHelper.EnsureType<MetaBinaryConverter>();
         AotHelper.EnsureType<RippleDateTimeConverter>();
         AotHelper.EnsureType<StringOrArrayConverter>();
@@ -63,13 +63,13 @@ public class AuthManager : ScriptableObject
         if (auth.CurrentUser != user) {
             bool signedIn = auth.CurrentUser != null;
             if (!signedIn && user != null) {
-                // LogText("SIGNED OUT " + user.UserId);
+                LogText("SIGNED OUT " + user.UserId);
                 SceneManager.LoadScene("SignInScene");
                 return;
             }
             user = auth.CurrentUser;
             if (signedIn) {
-                // LogText("SIGNED IN " + user.UserId);
+                LogText("SIGNED IN " + user.UserId);
                 _login(user);
                 return;
             }
@@ -92,17 +92,21 @@ public class AuthManager : ScriptableObject
         DocumentSnapshot userSnapshot = await userRef.GetSnapshotAsync();
         if (!userSnapshot.Exists) {
             LogText(String.Format("Document {0} does not exist!", userSnapshot.Id));
+            auth.SignOut();
+            SceneManager.LoadScene("SignInScene");
         } else {
-            // LogText("VALID MASTER USER");
+            LogText("VALID MASTER USER");
             Dictionary<string, object> userDict = userSnapshot.ToDictionary();
             DocumentReference playerRef = db.Collection("Players").Document(accountId);
             DocumentSnapshot playerSnapshot = await playerRef.GetSnapshotAsync();
             if (!playerSnapshot.Exists) {
                 LogText(String.Format("Document {0} does not exist!", playerSnapshot.Id));
+                auth.SignOut();
+                SceneManager.LoadScene("SignInScene");
             } else {
                 try
                 {
-                    // LogText("VALID PLAYER");
+                    LogText("VALID PLAYER");
                     Dictionary<string, object> playerDict = playerSnapshot.ToDictionary();
                     string serialized = JsonConvert.SerializeObject(playerDict);
                     Player selfPlayer = JsonConvert.DeserializeObject<Player>(serialized);
@@ -145,7 +149,7 @@ public class AuthManager : ScriptableObject
         // device.location = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
         
         Player newPlayer = new Player(
-            playerId: newPlayerRef.Id,
+            id: newPlayerRef.Id,
             permissionLevel: Player.PermissionLevelEnum.User,
             active: true,
             deleted: false,
@@ -165,7 +169,7 @@ public class AuthManager : ScriptableObject
         // newPlayer.device = device
         
         PlayerRef playerRef = new PlayerRef(
-            playerId: newPlayerRef.Id,
+            id: newPlayerRef.Id,
             active: true,
             deleted: false,
             createdTime: createdTime

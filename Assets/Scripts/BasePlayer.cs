@@ -9,6 +9,12 @@ public class BasePlayer : MonoBehaviour
     public GameObject menuHolder;
     private GameObject txMenu;
     private CommonTxMenu menuScript;
+
+    // Currently activating the object?
+    bool active = false;
+
+    // Currently hovering over the object?
+    bool hovering = false;
     
     void Start()
     {
@@ -20,14 +26,7 @@ public class BasePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
-
-    // Currently activating the object?
-    bool active = false;
-
-    // Currently hovering over the object?
-    bool hovering = false;
 
     public void SetActive(PointerEventData eventData) {
         Debug.Log(eventData.pointerEnter.transform.name);
@@ -73,7 +72,8 @@ public class BasePlayer : MonoBehaviour
             txMenu = menuHolder.transform.GetChild(0).gameObject;
             menuScript = txMenu.GetComponent<CommonTxMenu>() as CommonTxMenu;
             LedgerBox ledgerBox = GameObject.Find(eventData.pointerEnter.transform.name).GetComponent<LedgerBox>();
-            menuScript.transaction = ledgerBox.transaction;
+            menuScript.data = ledgerBox.data;
+            menuScript.UpdateMenu();
             txMenu.SetActive(true);
         } 
         else if (hovering) 
@@ -83,14 +83,13 @@ public class BasePlayer : MonoBehaviour
             txMenu = menuHolder.transform.GetChild(0).gameObject;
             menuScript = txMenu.GetComponent<CommonTxMenu>() as CommonTxMenu;
             LedgerBox ledgerBox = GameObject.Find(eventData.pointerEnter.transform.name).GetComponent<LedgerBox>();
-            menuScript.transaction = ledgerBox.transaction;
+            menuScript.data = ledgerBox.data;
+            menuScript.UpdateMenu();
             txMenu.SetActive(true);
         } 
         else 
         {
-            Debug.Log("NONE");
             txMenu.SetActive(false);
         }
-        Debug.Log(txMenu.activeSelf);
     }
 }

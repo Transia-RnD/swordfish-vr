@@ -14,7 +14,7 @@ public class SignInHandler : MonoBehaviour
   public InputField emailTextBox;
   public InputField passwordTextBox;
   public Button signinButton;
-  public Button createAccountButton;
+  public Button backButton;
   public Text emailErrorText;
   public Text passwordErrorText;
   private FirebaseAuth auth;
@@ -28,7 +28,7 @@ public class SignInHandler : MonoBehaviour
     passwordTextBox.text = "123456";
     auth = FirebaseAuth.DefaultInstance;
     signinButton.onClick.AddListener(() => SigninWithEmailAsync());
-    createAccountButton.onClick.AddListener(() => SceneManager.LoadScene("SignUpScene"));
+    backButton.onClick.AddListener(() => SceneManager.LoadScene("SignUpScene"));
   }
 
   public void Update()
@@ -78,7 +78,7 @@ public class SignInHandler : MonoBehaviour
     emailTextBox.DeactivateInputField();
     passwordTextBox.DeactivateInputField();
     signinButton.interactable = false;
-    createAccountButton.interactable = false;
+    backButton.interactable = false;
     // emailErrorText.enabled = false;
     // passwordErrorText.enabled = false;
   }
@@ -88,7 +88,7 @@ public class SignInHandler : MonoBehaviour
     emailTextBox.ActivateInputField();
     passwordTextBox.ActivateInputField();
     signinButton.interactable = true;
-    // createAccountButton.interactable = true;
+    backButton.interactable = true;
   }
 
   // Log the result of the specified task, returning true if the task

@@ -239,16 +239,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b225009c16a7b4ea18bc60bfd9ff87df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaymentMaterial: {fileID: 2100000, guid: cba66c276aed0874091de1c33eb3950d, type: 2}
-  TrustMaterial: {fileID: 2100000, guid: c181c23a6120fbe4aadd5bb53a58dd78, type: 2}
-  OfferMaterial: {fileID: 2100000, guid: 663834164c6a04740aaa1b778249ce7e, type: 2}
-  EscrowMaterial: {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
-  AccountMaterial: {fileID: 2100000, guid: 5a26de236ce89e94b963be8fa2b7ade6, type: 2}
-  NFTMaterial: {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
-  MiscMaterial: {fileID: 2100000, guid: f794c8451763f354c84ed1f9b0ea15a5, type: 2}
+  PaymentMaterial: {fileID: 2100000, guid: 10a70152f06e0482bbdaea905095ca99, type: 2}
+  TrustMaterial: {fileID: 2100000, guid: c857854368c15405f8e9d3e01904c5c0, type: 2}
+  OfferCreateMaterial: {fileID: 2100000, guid: 88535fb24606741ffbca9b4b1ce67525, type: 2}
+  OfferCancelMaterial: {fileID: 2100000, guid: 3a75a35d36db847f48d7487c6bd78763, type: 2}
+  EscrowMaterial: {fileID: 0}
+  AccountMaterial: {fileID: 0}
+  NFTMaterial: {fileID: 2100000, guid: c4275a95a283846e7aed5959c52e3867, type: 2}
+  MiscMaterial: {fileID: 0}
   txId: 
   endPos: {x: 0, y: 0, z: 0}
-  speed: 7
+  speed: 8
+  hash: 
+  response: 
 --- !u!114 &9062511594480091234
 MonoBehaviour:
   m_ObjectHideFlags: 0

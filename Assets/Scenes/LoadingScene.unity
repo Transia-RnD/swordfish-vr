@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0029746597, g: 0.0027814624, b: 0.0030795727, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,6 +131,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 625448277882816153, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 762378480766944487, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000550461
+      objectReference: {fileID: 0}
     - target: {fileID: 1120765825866982888, guid: 8b21269ac9bb5447f87e61c1cfc72892,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -244,6 +254,26 @@ PrefabInstance:
     - target: {fileID: 4255863351456071740, guid: 8b21269ac9bb5447f87e61c1cfc72892,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878019437238499465, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938702782883062201, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938702782883062201, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938702782883062201, guid: 8b21269ac9bb5447f87e61c1cfc72892,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7441797343273932417, guid: 8b21269ac9bb5447f87e61c1cfc72892,
@@ -470,6 +500,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798554213344153456, guid: dbf84b01ba5244efdba8a47a0d93c8ad,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7798554214349711930, guid: dbf84b01ba5244efdba8a47a0d93c8ad,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbf84b01ba5244efdba8a47a0d93c8ad, type: 3}

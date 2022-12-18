@@ -6,7 +6,7 @@
 // using Firebase.Auth;
 // using Firebase.Firestore;
 // using UnityEngine.UI;
-// using IO.Swagger.Model;
+// using GalleryCSharp.Models;
 // using Swordfish;
 // using Newtonsoft.Json;
 

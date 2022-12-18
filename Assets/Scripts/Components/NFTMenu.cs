@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Xrpl.Client;
-using Xrpl.Client.Model.Ledger;
 using Ipfs.Http;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
-
-// using Xrpl.Client.Responses.Transaction.Interfaces;
-// using Xrpl.Client.Responses.Transaction.TransactionTypes;
+using Xrpl.Client;
+using Xrpl.Models.Ledger;
 
 public class NFTMenu : MonoBehaviour
 {
     public HashOrTransaction transaction;
     public GameObject DebugText;
 
-    private static IRippleClient client;
+    private static IXrplClient client;
     // private static string serverUrl = "wss://s.altnet.rippletest.net:51233";
     private static string serverUrl = "wss://xls20-sandbox.rippletest.net:51233";
 
@@ -34,7 +31,7 @@ public class NFTMenu : MonoBehaviour
         // Debug.Log(transaction.TransactionHash);
         // ShowDefault();
 
-        client = new RippleClient(serverUrl);
+        client = new XrplClient(serverUrl);
         client.Connect();
         await GetTransaction();
     }

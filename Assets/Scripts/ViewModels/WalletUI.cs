@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Swordfish;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 
 public class WalletUI : MonoBehaviour
 {
@@ -19,6 +19,8 @@ public class WalletUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string seed = PlayerPrefs.GetString("seed");
+        Debug.Log($"User has wallet: {seed}");
         walletService = new WalletService();
         xrpService = new XrpService();
     }
@@ -26,7 +28,11 @@ public class WalletUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P))
+        if (PlayerPrefs.GetString("seed") == null)
+        {
+            uiButton.enabled = false;
+        }
+        if (Input.GetKeyUp(KeyCode.P) && PlayerPrefs.GetString("seed") == null)
         {
             CreateWallet();
         }

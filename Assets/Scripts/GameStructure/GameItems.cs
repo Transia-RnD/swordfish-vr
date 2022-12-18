@@ -1,5 +1,5 @@
 using UnityEngine;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using Firebase.Firestore;
 
 namespace Swordfish

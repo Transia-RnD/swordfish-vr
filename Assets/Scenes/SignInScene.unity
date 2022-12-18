@@ -662,7 +662,7 @@ MonoBehaviour:
   emailTextBox: {fileID: 6502426963213178712}
   passwordTextBox: {fileID: 6502426964587341313}
   signinButton: {fileID: 6502426963200537515}
-  createAccountButton: {fileID: 1979749381}
+  backButton: {fileID: 1979749381}
   emailErrorText: {fileID: 36958599}
   passwordErrorText: {fileID: 1115495743}
 --- !u!1001 &1630850178
@@ -685,12 +685,12 @@ PrefabInstance:
     - target: {fileID: 3437399652631916412, guid: 7ed48c5ecbc084980b41fa678ca37017,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0.157
       objectReference: {fileID: 0}
     - target: {fileID: 3437399652631916412, guid: 7ed48c5ecbc084980b41fa678ca37017,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.765
+      value: 0.74
       objectReference: {fileID: 0}
     - target: {fileID: 3437399652631916412, guid: 7ed48c5ecbc084980b41fa678ca37017,
         type: 3}
@@ -956,7 +956,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6502426963632799154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.796}
+  m_LocalPosition: {x: 0, y: 0, z: 0.771}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6502426964148590784}
@@ -971,7 +971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.805}
+  m_AnchoredPosition: {x: 0, y: 0.712}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6502426962548558470

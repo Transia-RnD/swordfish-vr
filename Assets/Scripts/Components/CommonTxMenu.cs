@@ -3,66 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Xrpl.Client;
-using Xrpl.Client.Model.Ledger;
-using Xrpl.Client.Responses.Transaction.Interfaces;
 using Ipfs.Http;
-using IO.Swagger.Model;
+using GalleryCSharp.Models;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
-
-// using Xrpl.Client.Responses.Transaction.Interfaces;
-// using Xrpl.Client.Responses.Transaction.TransactionTypes;
+using Xrpl.Models.Transaction;
+using Xrpl.Models.Subscriptions;
+using Xrpl.Models.Methods;
+using Newtonsoft.Json;
 
 public class CommonTxMenu : MonoBehaviour
 {
-    public ITransactionResponseCommon transaction;
+    public Dictionary<string, dynamic> data;
+    public GameObject TransactionType;
+    public GameObject Result;
+    public GameObject Hash;
+    public GameObject DateText;
+    public GameObject IndexText;
     public GameObject AccountText;
-    public GameObject TxTypeText;
+    public GameObject SequenceText;
     public GameObject FeeText;
 
-    // void SetValue(GameObject obj, string name, string value)
-    // {
-    //     Text text = obj.GetComponent<Text>();
-    //     text.text = string.Format(
-    //         "{0}: {1}",
-    //         name,
-    //         value
-    //     );
-    // }
+    void SetValue(GameObject obj, string name)
+    {
+        Text text = obj.GetComponent<Text>();
+        text.text = name;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        // SetValue(
-        //     AccountText,
-        //     "Account",
-        //     transaction.Transaction.Account.ToString()
-        // );
-        // SetValue(
-        //     TxTypeText,
-        //     "TransactionType",
-        //     transaction.Transaction.TransactionType.ToString()
-        // );
-        // SetValue(
-        //     FeeText,
-        //     "Fee",
-        //     transaction.Transaction.Fee.ToString()
-        // );
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
-    // public async Task GetTransaction()
-    // {
-        // TransactionResponseCommon rtransaction = await client.Transaction(transaction.Transaction.TransactionHash);
-        // ITransactionResponseCommon response = await client.Transaction("97DB76DC957E9CAFDB01435E7227AC4B5D455467BCFE1876F0C4700C3B3BCCF8");
-        // NFTokenMintTransactionResponse rtransaction = (NFTokenMintTransactionResponse)transaction.Transaction;
-        // NFTokenMintTransactionResponse rtransaction = (NFTokenMintTransactionResponse)response;
-        
-    // }
+    public void UpdateMenu()
+    {
+        Debug.Log("START MENU");
+        if (data != null)
+        {
+            string txString = JsonConvert.SerializeObject(data);
+            TransactionStream tx = JsonConvert.DeserializeObject<TransactionStream>(txString);
+            Debug.Log(tx.Transaction.Date);
+            Debug.Log(tx.Transaction.LedgerIndex);
+            Debug.Log(tx.Transaction.Account);
+            Debug.Log(tx.Transaction.Sequence);
+            Debug.Log(tx.Transaction.Fee.Value);
+            SetValue(
+                TransactionType,
+                tx.Transaction.TransactionType.ToString()
+            );
+            SetValue(
+                Hash,
+                tx.Transaction.Hash.ToString()
+            );
+            SetValue(
+                DateText,
+                tx.Transaction.Date.ToString()
+            );
+            SetValue(
+                IndexText,
+                tx.Transaction.LedgerIndex.ToString()
+            );
+            SetValue(
+                AccountText,
+                tx.Transaction.Account.ToString()
+            );
+            SetValue(
+                SequenceText,
+                tx.Transaction.Sequence.ToString()
+            );
+            SetValue(
+                FeeText,
+                tx.Transaction.Fee.Value.ToString()
+            );
+        }
+    }
 }

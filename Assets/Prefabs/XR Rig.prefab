@@ -1019,6 +1019,16 @@ MonoBehaviour:
   RightThumbstickAxis: {x: 0, y: 0}
   LeftTouchPadAxis: {x: 0, y: 0}
   RightTouchPadAxis: {x: 0, y: 0}
+  LeftThumbCurl: 0
+  LeftIndexCurl: 0
+  LeftMiddleCurl: 0
+  LeftRingCurl: 0
+  LeftPinkyCurl: 0
+  RightThumbCurl: 0
+  RightIndexCurl: 0
+  RightMiddleCurl: 0
+  RightRingCurl: 0
+  RightPinkyCurl: 0
   ConnectedControllerType: 0
   HMDActive: 0
   SupportsBothTouchPadAndJoystick: 0
@@ -1055,6 +1065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmulatorEnabled: 1
+  EditorOnly: 1
+  RequireGameFocus: 1
   EmulatorActionSet: {fileID: -944628639613478452, guid: 27bafa1c7d8a77b47985ab70c0511986,
     type: 3}
   ForceStraightTeleportRotation: 1
@@ -1088,7 +1100,6 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
-  RequireGameFocus: 1
 --- !u!114 &7539078666409110762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1102,6 +1113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EmulatorEnabled: 1
+  EditorOnly: 1
+  RequireGameFocus: 1
   EmulatorActionSet: {fileID: 0}
   ForceStraightTeleportRotation: 1
   AllowUpDownControls: 1
@@ -1124,7 +1137,6 @@ MonoBehaviour:
   HMDIsActive: 0
   LeftControllerPosition: {x: -0.2, y: -0.2, z: 0.5}
   RightControllerPosition: {x: 0.2, y: -0.2, z: 0.5}
-  RequireGameFocus: 1
 --- !u!1 &1409073012604956375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,6 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveCharacterWithCamera: 1
   RotateCharacterWithCamera: 1
+  ResizeCharacterHeightWithCamera: 1
   TrackingSpace: {fileID: 6329726623060322432}
   CameraRig: {fileID: 1294701745472339444}
   CenterEyeAnchor: {fileID: 2647131918157283211}
@@ -3011,7 +3024,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!1 &3247521628196903948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,6 +3574,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 4408814032520612261}
   ThumbJoints:
   - {fileID: 7318400245932659559}
@@ -4081,6 +4097,7 @@ MonoBehaviour:
   HandSide: 1
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 1
@@ -4230,6 +4247,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &4376619608997052994
 GameObject:
   m_ObjectHideFlags: 0
@@ -5278,6 +5300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
@@ -5600,7 +5623,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 0}
   handPoser: {fileID: 0}
   autoPoser: {fileID: 0}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 200512368490103582}
   GripAmount: 0
@@ -6072,6 +6096,7 @@ MonoBehaviour:
   HandSide: 0
   DefaultHoldType: 0
   DefaultGrabButton: 0
+  GrabAction: {fileID: 0}
   GripAmount: 0.9
   ReleaseGripAmount: 0.5
   GrabCheckSeconds: 1
@@ -6221,6 +6246,11 @@ MonoBehaviour:
   ClosestGrabbable: {fileID: 0}
   ClosestRemoteGrabbable: {fileID: 0}
   FireGrabbableEvents: 1
+  RaycastRemoteGrabbables: 0
+  RemoteGrabbablesMustBeVisible: 0
+  RemoteCollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &5751908216592651359
 GameObject:
   m_ObjectHideFlags: 0
@@ -6444,7 +6474,8 @@ MonoBehaviour:
   HandAnimator: {fileID: 383742924145399242}
   handPoser: {fileID: 1280760513001769593}
   autoPoser: {fileID: 4081438208949623564}
-  AutoPoseWhenNoGrabbable: 0
+  IdlePoseType: 0
+  UseIndexFingerTracking: 1
   HandAnimationSpeed: 20
   grabber: {fileID: 8795513734733630319}
   GripAmount: 0
@@ -6641,6 +6672,9 @@ MonoBehaviour:
   PoseName: Default
   CurrentPose: {fileID: 0}
   AnimationSpeed: 15
+  UpdateJointRotations: 1
+  UpdateJointPositions: 0
+  UpdateWristPosition: 1
   WristJoint: {fileID: 2471236845521427291}
   ThumbJoints:
   - {fileID: 1723066125798204752}
@@ -9077,6 +9111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PhysicsCheckType: 0
+  TriggerRequiresRaycast: 1
   RaycastLength: 20
   SphereCastLength: 20
   SphereCastRadius: 0.05
